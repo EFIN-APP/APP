@@ -41,39 +41,16 @@
 }
 
 .dark {
-  /* Updated dark mode tokens to maintain EFIN theme consistency */
-  --background: #0b144b;
-  --foreground: #ffffff;
-  --card: #1a2b6b;
-  --card-foreground: #ffffff;
-  --popover: #ffffff;
-  --popover-foreground: #0b144b;
-  --primary: #1f4bff;
-  --primary-foreground: #ffffff;
-  --secondary: #f1f5f9;
-  --secondary-foreground: #0b144b;
-  --muted: #6b7280;
-  --muted-foreground: #ffffff;
-  --accent: #1f4bff;
-  --accent-foreground: #ffffff;
+  /* Override only tokens that differ from :root */
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: #ffffff;
-  --input: #ffffff;
-  --ring: #1f4bff;
-  --chart-1: #0b144b;
-  --chart-2: #1f4bff;
-  --chart-3: #ffffff;
-  --chart-4: #f1f5f9;
-  --chart-5: #6b7280;
-  --sidebar: #0b144b;
-  --sidebar-foreground: #ffffff;
-  --sidebar-primary: #1f4bff;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #ffffff;
-  --sidebar-accent-foreground: #0b144b;
-  --sidebar-border: #ffffff;
-  --sidebar-ring: #1f4bff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --destructive: oklch(0.396 0.141 25.723);
+    --destructive-foreground: oklch(0.637 0.237 25.331);
+  }
 }
 
 @theme inline {
