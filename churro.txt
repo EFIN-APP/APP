@@ -1,2 +1,0 @@
-jajaja = "kk"
-jojojo = "jj"
