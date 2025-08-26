@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { ArrowLeft } from "lucide-react";
+import { useState } from "react";
 import { FormData } from "@/lib/types";
 
 interface AgeStepProps {
@@ -16,6 +17,18 @@ interface AgeStepProps {
 }
 
 export default function AgeStep({ formData, setFormData, progress, onNext, onBack }: AgeStepProps) {
+  const [error, setError] = useState<string | null>(null);
+
+  const handleNext = () => {
+    const age = formData.age ?? 0;
+    if (!age || age < 16 || age > 100) {
+      setError("Por favor ingresa una edad válida entre 16 y 100");
+      return;
+    }
+    setError(null);
+    onNext();
+  };
+
   return (
     <div className="min-h-screen bg-background flex flex-col p-4">
       <div className="flex items-center justify-between mb-4">
@@ -38,16 +51,17 @@ export default function AgeStep({ formData, setFormData, progress, onNext, onBac
                 <label className="block text-foreground text-lg font-medium mb-4">¿Cuál es tu edad?</label>
                 <Input
                   type="number"
-                  value={formData.age}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, age: Number.parseInt(e.target.value) || 18 }))}
+                  value={formData.age ?? ""}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, age: Number(e.target.value) }))}
                   className="text-center text-2xl bg-white text-black border-white"
                   min="16"
                   max="100"
                 />
+                {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
               </div>
             </div>
 
-            <Button onClick={onNext} className="w-full mt-8 bg-primary hover:bg-primary/90 text-primary-foreground">
+            <Button onClick={handleNext} className="w-full mt-8 bg-primary hover:bg-primary/90 text-primary-foreground">
               Siguiente
             </Button>
           </CardContent>

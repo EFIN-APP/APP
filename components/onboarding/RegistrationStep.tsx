@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Apple, Mail } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 import { FormData } from "@/lib/types";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 interface RegistrationStepProps {
   formData: FormData;
@@ -14,16 +16,37 @@ interface RegistrationStepProps {
   onNext: () => void;
 }
 
-export default function RegistrationStep({ formData, setFormData, onNext }: RegistrationStepProps) {
-  const [error, setError] = useState<string | null>(null);
+const registrationSchema = z
+  .object({
+    name: z.string().min(1, "Nombre es requerido"),
+    email: z.string().email("Email inválido"),
+    password: z.string().min(6, "Mínimo 6 caracteres"),
+    confirmPassword: z.string().min(6, "Mínimo 6 caracteres"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Las contraseñas no coinciden",
+    path: ["confirmPassword"],
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      setError("Las contraseñas no coinciden");
-      return;
-    }
-    setError(null);
+type RegistrationForm = z.infer<typeof registrationSchema>;
+
+export default function RegistrationStep({ formData, setFormData, onNext }: RegistrationStepProps) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<RegistrationForm>({
+    resolver: zodResolver(registrationSchema),
+    defaultValues: {
+      name: formData.name ?? "",
+      email: formData.email ?? "",
+      password: formData.password ?? "",
+      confirmPassword: formData.confirmPassword ?? "",
+    },
+  });
+
+  const onSubmit = (data: RegistrationForm) => {
+    setFormData((prev) => ({ ...prev, ...data }));
     onNext();
   };
 
@@ -59,42 +82,45 @@ export default function RegistrationStep({ formData, setFormData, onNext }: Regi
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <Input
-              type="text"
-              placeholder="Nombre"
-              value={formData.name}
-              required
-              onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
-              className="bg-white text-black placeholder:text-gray-500 border-white"
-            />
-            <Input
-              type="email"
-              placeholder="Email"
-              value={formData.email}
-              required
-              onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
-              className="bg-white text-black placeholder:text-gray-500 border-white"
-            />
-            <Input
-              type="password"
-              placeholder="Contraseña"
-              value={formData.password}
-              required
-              minLength={6}
-              onChange={(e) => setFormData((prev) => ({ ...prev, password: e.target.value }))}
-              className="bg-white text-black placeholder:text-gray-500 border-white"
-            />
-            <Input
-              type="password"
-              placeholder="Confirmar contraseña"
-              value={formData.confirmPassword}
-              required
-              minLength={6}
-              onChange={(e) => setFormData((prev) => ({ ...prev, confirmPassword: e.target.value }))}
-              className="bg-white text-black placeholder:text-gray-500 border-white"
-            />
-            {error && <p className="text-red-500 text-sm">{error}</p>}
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <div>
+              <Input
+                type="text"
+                placeholder="Nombre"
+                {...register("name")}
+                className="bg-white text-black placeholder:text-gray-500 border-white"
+              />
+              {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
+            </div>
+            <div>
+              <Input
+                type="email"
+                placeholder="Email"
+                {...register("email")}
+                className="bg-white text-black placeholder:text-gray-500 border-white"
+              />
+              {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+            </div>
+            <div>
+              <Input
+                type="password"
+                placeholder="Contraseña"
+                {...register("password")}
+                className="bg-white text-black placeholder:text-gray-500 border-white"
+              />
+              {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
+            </div>
+            <div>
+              <Input
+                type="password"
+                placeholder="Confirmar contraseña"
+                {...register("confirmPassword")}
+                className="bg-white text-black placeholder:text-gray-500 border-white"
+              />
+              {errors.confirmPassword && (
+                <p className="text-red-500 text-sm">{errors.confirmPassword.message}</p>
+              )}
+            </div>
             <Button type="submit" className="w-full mt-6 bg-primary hover:bg-primary/90 text-primary-foreground">
               Registrarme
             </Button>
