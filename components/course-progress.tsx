@@ -3,38 +3,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { Badge } from "@/components/ui/badge"
 import { BookOpen, Clock } from "lucide-react"
+import { Course, courses as defaultCourses } from "@/lib/data"
 
-export function CourseProgress() {
-  const courses = [
-    {
-      id: 1,
-      title: "Fundamentos de Finanzas",
-      progress: 75,
-      totalLessons: 12,
-      completedLessons: 9,
-      timeLeft: "2h 30min",
-      badge: "En progreso",
-    },
-    {
-      id: 2,
-      title: "Inversiones para Principiantes",
-      progress: 40,
-      totalLessons: 15,
-      completedLessons: 6,
-      timeLeft: "4h 15min",
-      badge: "En progreso",
-    },
-    {
-      id: 3,
-      title: "Presupuesto Personal",
-      progress: 100,
-      totalLessons: 8,
-      completedLessons: 8,
-      timeLeft: "Completado",
-      badge: "Completado",
-    },
-  ]
+interface CourseProgressProps {
+  courses?: Course[]
+}
 
+export function CourseProgress({ courses = defaultCourses }: CourseProgressProps) {
   return (
     <div className="space-y-4">
       {/* Overall Progress */}
