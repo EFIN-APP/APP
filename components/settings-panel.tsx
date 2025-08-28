@@ -33,6 +33,7 @@ export function SettingsPanel({ onBack }: SettingsPanelProps) {
             size="icon"
             className="text-primary-foreground hover:bg-primary/20 mr-3"
             onClick={() => setShowPersonalData(false)}
+            aria-label="Volver"
           >
             <ChevronLeft className="w-6 h-6" />
           </Button>
@@ -127,6 +128,7 @@ export function SettingsPanel({ onBack }: SettingsPanelProps) {
           size="icon"
           className="text-primary-foreground hover:bg-primary/20 mr-3"
           onClick={onBack}
+          aria-label="Volver"
         >
           <ChevronLeft className="w-6 h-6" />
         </Button>

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -11,8 +12,16 @@ import { CourseProgress } from "./course-progress"
 import { SettingsPanel } from "./settings-panel"
 
 export function ProfileInterface() {
-  const [activeTab, setActiveTab] = useState("grid")
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const activeTab = searchParams.get("tab") ?? "grid"
   const [showSettings, setShowSettings] = useState(false)
+
+  const handleTabChange = (value: string) => {
+    const params = new URLSearchParams(searchParams)
+    params.set("tab", value)
+    router.replace(`?${params.toString()}`)
+  }
 
   if (showSettings) {
     return <SettingsPanel onBack={() => setShowSettings(false)} />
@@ -22,13 +31,14 @@ export function ProfileInterface() {
     <div className="max-w-md mx-auto bg-background min-h-screen">
       {/* Header */}
       <div className="bg-primary text-primary-foreground p-4 flex items-center justify-between">
-        <ChevronLeft className="w-6 h-6" />
+        <ChevronLeft className="w-6 h-6" aria-hidden="true" />
         <h1 className="font-bold text-lg">Tu Perfil</h1>
         <Button
           variant="ghost"
           size="icon"
           className="text-primary-foreground hover:bg-primary/20"
           onClick={() => setShowSettings(true)}
+          aria-label="Ajustes"
         >
           <Settings className="w-6 h-6" />
         </Button>
@@ -38,7 +48,7 @@ export function ProfileInterface() {
       <UserInfoCard />
 
       {/* Tab Navigation */}
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="px-4">
+      <Tabs value={activeTab} onValueChange={handleTabChange} className="px-4">
         <TabsList className="grid w-full grid-cols-5 mb-4">
           <TabsTrigger value="grid" className="p-2">
             <Grid3X3 className="w-5 h-5" />
@@ -96,6 +106,7 @@ export function ProfileInterface() {
             variant="ghost"
             size="icon"
             className="text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary/20"
+            aria-label="Tendencias"
           >
             <Flame className="w-6 h-6" />
           </Button>
@@ -103,6 +114,7 @@ export function ProfileInterface() {
             variant="ghost"
             size="icon"
             className="text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary/20"
+            aria-label="Inicio"
           >
             <Home className="w-6 h-6" />
           </Button>
@@ -110,10 +122,16 @@ export function ProfileInterface() {
             variant="ghost"
             size="icon"
             className="text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary/20"
+            aria-label="Explorar"
           >
             <Compass className="w-6 h-6" />
           </Button>
-          <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-primary/20">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-primary-foreground hover:bg-primary/20"
+            aria-label="Perfil"
+          >
             <User className="w-6 h-6" />
           </Button>
         </div>

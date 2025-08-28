@@ -3,48 +3,14 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Heart, MessageCircle, Bookmark, Share } from "lucide-react"
+import { Post, posts as defaultPosts } from "@/lib/data"
 
 interface PostsFeedProps {
   showSocial?: boolean
+  posts?: Post[]
 }
 
-export function PostsFeed({ showSocial = false }: PostsFeedProps) {
-  const posts = [
-    {
-      id: 1,
-      user: "Santiago Carrasco",
-      username: "@santicarrasco",
-      time: "2h",
-      content: "Acabo de completar mi primera lección sobre presupuestos. ¡Me siento más confiado con mis finanzas!",
-      tags: ["#presupuesto", "#finanzas"],
-      likes: 12,
-      comments: 3,
-      avatar: "/diverse-user-avatars.png",
-    },
-    {
-      id: 2,
-      user: "Delfina Palmero",
-      username: "@delfinapalmero",
-      time: "4h",
-      content: "Compartiendo mi progreso del curso de inversiones. Ya voy por el 60% completado.",
-      tags: ["#inversiones", "#progreso"],
-      likes: 8,
-      comments: 1,
-      avatar: "/female-user-avatar.png",
-    },
-    {
-      id: 3,
-      user: "Juana Mora",
-      username: "@juanamora",
-      time: "6h",
-      content: "¿Alguien más está tomando el curso de criptomonedas? Me gustaría formar un grupo de estudio.",
-      tags: ["#crypto", "#estudio"],
-      likes: 15,
-      comments: 7,
-      avatar: "/professional-woman-avatar.png",
-    },
-  ]
-
+export function PostsFeed({ showSocial = false, posts = defaultPosts }: PostsFeedProps) {
   return (
     <div className="space-y-4">
       {posts.map((post) => (
@@ -91,10 +57,20 @@ export function PostsFeed({ showSocial = false }: PostsFeedProps) {
                 </Button>
               </div>
               <div className="flex items-center space-x-2">
-                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-accent p-1">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-muted-foreground hover:text-accent p-1"
+                  aria-label="Guardar"
+                >
                   <Bookmark className="w-4 h-4" />
                 </Button>
-                <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-accent p-1">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-muted-foreground hover:text-accent p-1"
+                  aria-label="Compartir"
+                >
                   <Share className="w-4 h-4" />
                 </Button>
               </div>
