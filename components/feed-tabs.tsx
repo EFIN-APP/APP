@@ -2,13 +2,19 @@
 
 import { cn } from "@/lib/utils"
 
+export enum FeedTab {
+  ForYou = "For You",
+  Following = "Following",
+  Finance = "Finance",
+}
+
 interface FeedTabsProps {
-  activeTab: string
-  onTabChange: (tab: string) => void
+  activeTab: FeedTab
+  onTabChange: (tab: FeedTab) => void
 }
 
 export function FeedTabs({ activeTab, onTabChange }: FeedTabsProps) {
-  const tabs = ["For You", "Following", "Finance"]
+  const tabs = [FeedTab.ForYou, FeedTab.Following, FeedTab.Finance]
 
   return (
     <div className="px-4 mb-4">
