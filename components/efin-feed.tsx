@@ -1,111 +1,25 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useCallback } from "react"
 import { Card } from "./ui/card"
-import { Button } from "./ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
 import { Badge } from "./ui/badge"
-import { Heart, MessageCircle, Repeat2, Bookmark, Play, TrendingUp } from "lucide-react"
+import { Play, TrendingUp } from "lucide-react"
 import { PopularLessons } from "./popular-lessons"
-
-interface FeedPost {
-  id: string
-  username: string
-  avatar: string
-  timestamp: string
-  content: string
-  likes: number
-  comments: number
-  reposts: number
-  isLiked: boolean
-  isSaved: boolean
-  isReposted: boolean
-  tags?: string[]
-  lessonReference?: {
-    title: string
-    progress: number
-  }
-}
+import { FeedTab } from "./feed-tabs"
+import { FeedPost, mockPosts } from "@/lib/posts"
+import { PostActions } from "./post-actions"
 
 interface EFINFeedProps {
-  activeTab: string
+  activeTab: FeedTab
 }
 
 export function EFINFeed({ activeTab }: EFINFeedProps) {
-  const [posts, setPosts] = useState<FeedPost[]>([
-    {
-      id: "1",
-      username: "FinanceGuru",
-      avatar: "/finance-expert.png",
-      timestamp: "2h",
-      content:
-        "Just completed the Time Value of Money module! The compound interest calculator really helped me understand how my investments will grow over time.",
-      likes: 24,
-      comments: 8,
-      reposts: 3,
-      isLiked: false,
-      isSaved: true,
-      isReposted: false,
-      tags: ["TimeValue", "CompoundInterest"],
-      lessonReference: {
-        title: "Time Value of Money",
-        progress: 100,
-      },
-    },
-    {
-      id: "2",
-      username: "InvestmentNewbie",
-      avatar: "/student-learning.png",
-      timestamp: "4h",
-      content:
-        "Can someone explain why money today is worth more than money tomorrow? Still wrapping my head around this concept.",
-      likes: 12,
-      comments: 15,
-      reposts: 1,
-      isLiked: true,
-      isSaved: false,
-      isReposted: false,
-      tags: ["Question", "TimeValue"],
-    },
-    {
-      id: "3",
-      username: "EFINTeacher",
-      avatar: "/teacher-professional.png",
-      timestamp: "6h",
-      content:
-        "Pro tip: Use the TVM simulator with different scenarios. Try calculating what happens if you save $100/month vs $200/month over 10 years. The difference will surprise you!",
-      likes: 45,
-      comments: 12,
-      reposts: 8,
-      isLiked: false,
-      isSaved: false,
-      isReposted: false,
-      tags: ["ProTip", "Savings", "TVM"],
-    },
-    {
-      id: "4",
-      username: "BudgetMaster",
-      avatar: "/budget-expert.png",
-      timestamp: "8h",
-      content:
-        "Started the budgeting fundamentals course today. The 50/30/20 rule is a game changer for managing expenses!",
-      likes: 18,
-      comments: 6,
-      reposts: 4,
-      isLiked: false,
-      isSaved: true,
-      isReposted: false,
-      tags: ["Budgeting", "PersonalFinance"],
-      lessonReference: {
-        title: "Budgeting Fundamentals",
-        progress: 25,
-      },
-    },
-  ])
+  const [posts, setPosts] = useState<FeedPost[]>(mockPosts)
 
-  const handleLike = (postId: string) => {
-    setPosts(
-      posts.map((post) =>
+  const handleLike = useCallback((postId: string) => {
+    setPosts((prev) =>
+      prev.map((post) =>
         post.id === postId
           ? {
               ...post,
@@ -115,15 +29,15 @@ export function EFINFeed({ activeTab }: EFINFeedProps) {
           : post,
       ),
     )
-  }
+  }, [])
 
-  const handleSave = (postId: string) => {
-    setPosts(posts.map((post) => (post.id === postId ? { ...post, isSaved: !post.isSaved } : post)))
-  }
+  const handleSave = useCallback((postId: string) => {
+    setPosts((prev) => prev.map((post) => (post.id === postId ? { ...post, isSaved: !post.isSaved } : post)))
+  }, [])
 
-  const handleRepost = (postId: string) => {
-    setPosts(
-      posts.map((post) =>
+  const handleRepost = useCallback((postId: string) => {
+    setPosts((prev) =>
+      prev.map((post) =>
         post.id === postId
           ? {
               ...post,
@@ -133,13 +47,13 @@ export function EFINFeed({ activeTab }: EFINFeedProps) {
           : post,
       ),
     )
-  }
+  }, [])
 
   const filteredPosts = posts.filter((post) => {
     switch (activeTab) {
-      case "Following":
+      case FeedTab.Following:
         return ["FinanceGuru", "EFINTeacher"].includes(post.username)
-      case "Finance":
+      case FeedTab.Finance:
         return post.tags?.some((tag) => ["TimeValue", "Budgeting", "PersonalFinance", "TVM"].includes(tag))
       default:
         return true
@@ -148,7 +62,7 @@ export function EFINFeed({ activeTab }: EFINFeedProps) {
 
   return (
     <div className="space-y-6">
-      {activeTab === "For You" && (
+      {activeTab === FeedTab.ForYou && (
         <div>
           <div className="flex items-center gap-2 mb-4">
             <TrendingUp className="h-5 w-5 text-efin-blue" />
@@ -198,51 +112,12 @@ export function EFINFeed({ activeTab }: EFINFeedProps) {
                 </div>
               )}
 
-              <div className="flex items-center justify-between">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => handleLike(post.id)}
-                  className={`flex items-center gap-2 transition-colors ${
-                    post.isLiked ? "text-red-500 hover:text-red-600" : "text-gray-500 hover:text-red-500"
-                  }`}
-                >
-                  <Heart className={`h-4 w-4 ${post.isLiked ? "fill-current" : ""}`} />
-                  {post.likes}
-                </Button>
-
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="flex items-center gap-2 text-gray-500 hover:text-efin-blue transition-colors"
-                >
-                  <MessageCircle className="h-4 w-4" />
-                  {post.comments}
-                </Button>
-
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => handleRepost(post.id)}
-                  className={`flex items-center gap-2 transition-colors ${
-                    post.isReposted ? "text-green-500 hover:text-green-600" : "text-gray-500 hover:text-green-500"
-                  }`}
-                >
-                  <Repeat2 className="h-4 w-4" />
-                  {post.reposts}
-                </Button>
-
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => handleSave(post.id)}
-                  className={`transition-colors ${
-                    post.isSaved ? "text-efin-blue hover:text-efin-blue/80" : "text-gray-500 hover:text-efin-blue"
-                  }`}
-                >
-                  <Bookmark className={`h-4 w-4 ${post.isSaved ? "fill-current" : ""}`} />
-                </Button>
-              </div>
+              <PostActions
+                post={post}
+                onLike={handleLike}
+                onRepost={handleRepost}
+                onSave={handleSave}
+              />
             </div>
           </div>
         </Card>
