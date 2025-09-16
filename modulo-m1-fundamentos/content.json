@@ -1,0 +1,148 @@
+{
+  "id": "M1_fundamentos",
+  "titulo": "Fundamentos de la inversión: interés compuesto, inflación y riesgo–retorno",
+  "objetivos": [
+    "Diferenciar interés simple vs. compuesto y su impacto en el tiempo",
+    "Entender el efecto de la inflación en el poder adquisitivo",
+    "Relacionar riesgo con retorno esperado y liquidez",
+    "Cuantificar el impacto de comisiones en la rentabilidad",
+    "Calcular rendimientos reales vs. nominales"
+  ],
+  "por_que_importa": "En Argentina, con inflación histórica del 100%+ anual, entender estos conceptos es crucial para preservar y hacer crecer tu dinero. El interés compuesto puede ser tu aliado más poderoso, pero la inflación y las comisiones pueden erosionar tus ahorros silenciosamente. Dominar estos fundamentos te permitirá tomar decisiones informadas y evitar que la inflación devore tu patrimonio mientras buscas oportunidades de crecimiento real.",
+  "ideas_clave": [
+    {
+      "titulo": "Interés compuesto",
+      "explicacion_corta": "Los intereses generan nuevos intereses con el tiempo, creando crecimiento exponencial."
+    },
+    {
+      "titulo": "Inflación y poder adquisitivo",
+      "explicacion_corta": "Los precios suben; tu dinero rinde menos si no se actualiza por encima de la inflación."
+    },
+    {
+      "titulo": "TNA vs TEA",
+      "explicacion_corta": "TNA no capitaliza automáticamente; TEA sí incluye el efecto de la capitalización."
+    },
+    {
+      "titulo": "Relación riesgo-retorno",
+      "explicacion_corta": "Mayor retorno esperado generalmente implica mayor riesgo de pérdidas."
+    },
+    {
+      "titulo": "Liquidez",
+      "explicacion_corta": "Facilidad para convertir una inversión en efectivo sin perder valor significativo."
+    },
+    {
+      "titulo": "Costos y comisiones",
+      "explicacion_corta": "Pequeñas comisiones anuales pueden reducir significativamente el patrimonio a largo plazo."
+    },
+    {
+      "titulo": "Rendimiento real vs nominal",
+      "explicacion_corta": "El rendimiento real descuenta la inflación del nominal para medir ganancia efectiva."
+    }
+  ],
+  "ejemplo_local": {
+    "descripcion": "Con $100.000 ARS a TNA 60% durante 12 meses con inflación 180% anual y comisión 1% anual, el resultado final es muy diferente al esperado inicialmente.",
+    "supuestos": {
+      "monto_inicial": 100000,
+      "tna": 60,
+      "inflacion_anual": 180,
+      "comision_anual": 1,
+      "meses": 12
+    },
+    "calculo": {
+      "patrimonio_final_nominal": 159000,
+      "patrimonio_final_real": 56786,
+      "perdida_poder_adquisitivo_pct": -43.21
+    }
+  },
+  "glosario": [
+    {
+      "termino": "TNA",
+      "definicion": "Tasa Nominal Anual; no capitaliza por defecto."
+    },
+    {
+      "termino": "TEA",
+      "definicion": "Tasa Efectiva Anual; considera capitalización de intereses."
+    },
+    {
+      "termino": "Inflación",
+      "definicion": "Aumento generalizado y sostenido de precios en la economía."
+    },
+    {
+      "termino": "Riesgo",
+      "definicion": "Probabilidad de pérdida o variabilidad en los retornos esperados."
+    },
+    {
+      "termino": "Liquidez",
+      "definicion": "Facilidad para convertir un activo en efectivo rápidamente."
+    },
+    {
+      "termino": "Spread",
+      "definicion": "Diferencia entre precio de compra y venta de un activo."
+    },
+    {
+      "termino": "Comisión",
+      "definicion": "Costo cobrado por intermediarios financieros por sus servicios."
+    },
+    {
+      "termino": "Horizonte",
+      "definicion": "Período de tiempo que planeas mantener una inversión."
+    },
+    {
+      "termino": "Volatilidad",
+      "definicion": "Medida de variabilidad en el precio de un activo."
+    },
+    {
+      "termino": "Capitalización",
+      "definicion": "Proceso de reinvertir intereses para generar más intereses."
+    },
+    {
+      "termino": "Deflactor",
+      "definicion": "Factor usado para ajustar valores nominales por inflación."
+    },
+    {
+      "termino": "Patrimonio",
+      "definicion": "Valor total de activos menos pasivos de una persona."
+    }
+  ],
+  "takeaway": [
+    "Mide siempre el retorno real, no solo el nominal, descontando inflación",
+    "Pequeñas comisiones anuales erosionan significativamente el capital a largo plazo",
+    "El interés compuesto requiere tiempo para mostrar su verdadero poder",
+    "Mayor liquidez generalmente implica menor rentabilidad esperada",
+    "Diversifica para balancear riesgo, retorno y liquidez según tus objetivos"
+  ],
+  "flashcards": [
+    {
+      "front": "¿Qué es TEA?",
+      "back": "Tasa Efectiva Anual: considera capitalización de intereses"
+    },
+    {
+      "front": "¿Cómo afecta la inflación a tus ahorros?",
+      "back": "Reduce el poder adquisitivo si el retorno no la supera"
+    },
+    {
+      "front": "¿Qué es el interés compuesto?",
+      "back": "Intereses que generan nuevos intereses, creando crecimiento exponencial"
+    },
+    {
+      "front": "¿Qué relación hay entre riesgo y retorno?",
+      "back": "A mayor retorno esperado, generalmente mayor riesgo"
+    },
+    {
+      "front": "¿Qué es liquidez?",
+      "back": "Facilidad para convertir una inversión en efectivo sin perder valor"
+    },
+    {
+      "front": "¿Cómo calcular rendimiento real?",
+      "back": "Rendimiento nominal menos inflación del período"
+    },
+    {
+      "front": "¿Por qué importan las comisiones?",
+      "back": "Pequeños porcentajes anuales reducen mucho el patrimonio a largo plazo"
+    },
+    {
+      "front": "TNA 60% vs TEA 60%, ¿cuál rinde más?",
+      "back": "TEA 60% rinde más porque ya incluye capitalización"
+    }
+  ]
+}

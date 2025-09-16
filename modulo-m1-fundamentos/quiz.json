@@ -1,0 +1,156 @@
+{
+  "version": "1.0",
+  "passing_rule": {
+    "min_correct": 8,
+    "total": 12
+  },
+  "items": [
+    {
+      "id": "q1",
+      "tipo": "multiple_choice",
+      "enunciado": "La diferencia central entre interés simple y compuesto es:",
+      "opciones": [
+        "La capitalización de intereses",
+        "La moneda utilizada",
+        "El plazo de la inversión",
+        "La entidad emisora"
+      ],
+      "respuesta_correcta": 0,
+      "explicacion_feedback": "El compuesto capitaliza intereses sobre intereses, generando crecimiento exponencial.",
+      "dificultad": 1,
+      "tag": "compuesto"
+    },
+    {
+      "id": "q2",
+      "tipo": "true_false",
+      "enunciado": "Una TNA de 60% siempre rinde igual que una TEA de 60%.",
+      "respuesta_correcta": false,
+      "explicacion_feedback": "TEA ya incluye capitalización, por lo que rinde más que TNA del mismo porcentaje.",
+      "dificultad": 2,
+      "tag": "tasas"
+    },
+    {
+      "id": "q3",
+      "tipo": "multiple_choice",
+      "enunciado": "Si la inflación anual es 100% y tu inversión rinde 80% nominal, tu rendimiento real es:",
+      "opciones": ["Aproximadamente -10%", "+20%", "+80%", "0%"],
+      "respuesta_correcta": 0,
+      "explicacion_feedback": "Rendimiento real ≈ (1.80/2.00 - 1) = -10%. Perdiste poder adquisitivo.",
+      "dificultad": 2,
+      "tag": "inflacion"
+    },
+    {
+      "id": "q4",
+      "tipo": "numeric_input",
+      "enunciado": "Con $100.000 ARS al 50% TNA capitalizable mensualmente por 1 año, ¿cuál es el monto final aproximado? (responder en miles, ej: 163)",
+      "respuesta_correcta": 164,
+      "tolerancia": 2,
+      "explicacion_feedback": "TEA = (1 + 0.50/12)^12 - 1 ≈ 63.4%. Monto final ≈ $163.400.",
+      "dificultad": 3,
+      "tag": "calculo"
+    },
+    {
+      "id": "q5",
+      "tipo": "multiple_choice",
+      "enunciado": "¿Cuál activo típicamente tiene MAYOR liquidez?",
+      "opciones": [
+        "Cuenta corriente en banco",
+        "Plazo fijo a 365 días",
+        "Propiedad inmobiliaria",
+        "Fondo común de inversión"
+      ],
+      "respuesta_correcta": 0,
+      "explicacion_feedback": "La cuenta corriente permite acceso inmediato sin penalidades ni demoras.",
+      "dificultad": 1,
+      "tag": "liquidez"
+    },
+    {
+      "id": "q6",
+      "tipo": "true_false",
+      "enunciado": "Una comisión anual del 2% es insignificante para el patrimonio a largo plazo.",
+      "respuesta_correcta": false,
+      "explicacion_feedback": "2% anual puede reducir el patrimonio final en 20-40% en horizontes largos.",
+      "dificultad": 2,
+      "tag": "costos"
+    },
+    {
+      "id": "q7",
+      "tipo": "multiple_choice",
+      "enunciado": "En general, ¿qué relación existe entre riesgo y retorno esperado?",
+      "opciones": [
+        "A mayor riesgo, mayor retorno esperado",
+        "A mayor riesgo, menor retorno esperado",
+        "No hay relación entre ambos",
+        "Solo depende del plazo"
+      ],
+      "respuesta_correcta": 0,
+      "explicacion_feedback": "Los mercados compensan el riesgo adicional con mayor retorno esperado.",
+      "dificultad": 1,
+      "tag": "riesgo"
+    },
+    {
+      "id": "q8",
+      "tipo": "numeric_input",
+      "enunciado": "Si inviertes $50.000 ARS con aportes mensuales de $10.000 al 40% TNA por 6 meses, ¿cuánto aportaste en total? (en miles)",
+      "respuesta_correcta": 110,
+      "tolerancia": 0,
+      "explicacion_feedback": "Inicial $50.000 + 6 aportes × $10.000 = $110.000 total aportado.",
+      "dificultad": 1,
+      "tag": "aportes"
+    },
+    {
+      "id": "q9",
+      "tipo": "multiple_choice",
+      "enunciado": "¿Cuál es la principal ventaja del interés compuesto vs. simple?",
+      "opciones": [
+        "Crecimiento exponencial en el tiempo",
+        "Menor riesgo de pérdida",
+        "Mayor liquidez",
+        "Menores comisiones"
+      ],
+      "respuesta_correcta": 0,
+      "explicacion_feedback": "El compuesto genera crecimiento exponencial porque reinvierte automáticamente los intereses.",
+      "dificultad": 1,
+      "tag": "compuesto"
+    },
+    {
+      "id": "q10",
+      "tipo": "true_false",
+      "enunciado": "El rendimiento nominal siempre es mayor al rendimiento real en contextos inflacionarios.",
+      "respuesta_correcta": true,
+      "explicacion_feedback": "El real descuenta inflación del nominal, por lo que es menor en contextos inflacionarios.",
+      "dificultad": 2,
+      "tag": "inflacion"
+    },
+    {
+      "id": "q11",
+      "tipo": "multiple_choice",
+      "enunciado": "¿Qué factor NO afecta directamente el cálculo de TEA?",
+      "opciones": [
+        "La inflación esperada",
+        "La tasa nominal anual",
+        "La frecuencia de capitalización",
+        "El período de tiempo"
+      ],
+      "respuesta_correcta": 0,
+      "explicacion_feedback": "TEA se calcula solo con TNA y capitalización. La inflación afecta el rendimiento real.",
+      "dificultad": 3,
+      "tag": "tasas"
+    },
+    {
+      "id": "q12",
+      "tipo": "multiple_choice",
+      "enunciado": "¿Cuál estrategia es más efectiva contra la inflación alta?",
+      "opciones": [
+        "Inversiones que superen la inflación consistentemente",
+        "Mantener todo en efectivo",
+        "Invertir solo a corto plazo",
+        "Evitar cualquier tipo de riesgo"
+      ],
+      "respuesta_correcta": 0,
+      "explicacion_feedback": "Solo superando la inflación preservas y aumentas el poder adquisitivo real.",
+      "dificultad": 2,
+      "tag": "estrategia"
+    }
+  ]
+}

@@ -1,0 +1,375 @@
+{
+  "version": "1.0",
+  "events": [
+    {
+      "name": "pager_swipe",
+      "description": "Usuario desliza horizontalmente entre páginas",
+      "properties": {
+        "from": {
+          "type": "number",
+          "required": true,
+          "description": "Índice de página origen (0-based)"
+        },
+        "to": {
+          "type": "number",
+          "required": true,
+          "description": "Índice de página destino (0-based)"
+        },
+        "module": {
+          "type": "string",
+          "required": true,
+          "description": "ID del módulo (M1)"
+        }
+      }
+    },
+    {
+      "name": "pager_nav_click",
+      "description": "Usuario navega usando controles (flechas, dots, CTA)",
+      "properties": {
+        "to": {
+          "type": "number",
+          "required": true,
+          "description": "Índice de página destino (0-based)"
+        },
+        "source": {
+          "type": "string",
+          "enum": ["arrow", "dot", "cta"],
+          "required": true,
+          "description": "Tipo de control usado para navegar"
+        },
+        "module": {
+          "type": "string",
+          "required": true,
+          "description": "ID del módulo (M1)"
+        }
+      }
+    },
+    {
+      "name": "module_started",
+      "description": "Usuario inicia el módulo M1",
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "default": "anon",
+          "description": "Identificador de usuario (anónimo por defecto)"
+        },
+        "module_id": {
+          "type": "string",
+          "required": true,
+          "description": "ID del módulo (M1_fundamentos)"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "ISO8601",
+          "required": true,
+          "description": "Momento de inicio del módulo"
+        },
+        "user_agent": {
+          "type": "string",
+          "description": "Información del navegador"
+        }
+      }
+    },
+    {
+      "name": "lesson_viewed",
+      "description": "Usuario visualiza una sección del módulo",
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "default": "anon"
+        },
+        "module_id": {
+          "type": "string",
+          "required": true
+        },
+        "section_id": {
+          "type": "string",
+          "required": true,
+          "enum": ["portada", "why_matters", "key_ideas", "quiz", "simulator", "game", "takeaway"],
+          "description": "Sección específica visualizada"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "ISO8601",
+          "required": true
+        },
+        "time_spent_seconds": {
+          "type": "number",
+          "description": "Tiempo en la sección en segundos"
+        }
+      }
+    },
+    {
+      "name": "quiz_answered",
+      "description": "Usuario responde una pregunta del quiz",
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "default": "anon"
+        },
+        "module_id": {
+          "type": "string",
+          "required": true
+        },
+        "item_id": {
+          "type": "string",
+          "required": true,
+          "description": "ID de la pregunta respondida"
+        },
+        "correct": {
+          "type": "boolean",
+          "required": true,
+          "description": "Si la respuesta fue correcta"
+        },
+        "user_answer": {
+          "type": "string",
+          "description": "Respuesta del usuario"
+        },
+        "time_to_answer_seconds": {
+          "type": "number",
+          "description": "Tiempo para responder en segundos"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "ISO8601",
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "quiz_completed",
+      "description": "Usuario completa todo el quiz",
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "default": "anon"
+        },
+        "module_id": {
+          "type": "string",
+          "required": true
+        },
+        "score": {
+          "type": "number",
+          "required": true,
+          "description": "Número de respuestas correctas"
+        },
+        "total_questions": {
+          "type": "number",
+          "required": true,
+          "description": "Total de preguntas en el quiz"
+        },
+        "passed": {
+          "type": "boolean",
+          "required": true,
+          "description": "Si aprobó según passing_rule"
+        },
+        "total_time_seconds": {
+          "type": "number",
+          "description": "Tiempo total del quiz en segundos"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "ISO8601",
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "simulator_run",
+      "description": "Usuario ejecuta el simulador de interés compuesto",
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "default": "anon"
+        },
+        "module_id": {
+          "type": "string",
+          "required": true
+        },
+        "preset_id": {
+          "type": "string",
+          "description": "ID del preset usado (baja_inflacion, media_inflacion, etc.) o 'custom'"
+        },
+        "meses": {
+          "type": "number",
+          "required": true,
+          "description": "Horizonte de la simulación en meses"
+        },
+        "tna": {
+          "type": "number",
+          "required": true,
+          "description": "Tasa nominal anual usada"
+        },
+        "inflacion_media": {
+          "type": "number",
+          "description": "Inflación mensual promedio de la serie"
+        },
+        "monto_inicial": {
+          "type": "number",
+          "required": true,
+          "description": "Capital inicial en ARS"
+        },
+        "aporte_mensual": {
+          "type": "number",
+          "required": true,
+          "description": "Aporte mensual en ARS"
+        },
+        "comision_anual_pct": {
+          "type": "number",
+          "required": true,
+          "description": "Comisión anual como porcentaje"
+        },
+        "rendimiento_real_pct": {
+          "type": "number",
+          "description": "Rendimiento real final obtenido"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "ISO8601",
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "game_round_completed",
+      "description": "Usuario completa una ronda del juego",
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "default": "anon"
+        },
+        "module_id": {
+          "type": "string",
+          "required": true
+        },
+        "round_id": {
+          "type": "string",
+          "required": true,
+          "description": "ID de la ronda completada"
+        },
+        "correct": {
+          "type": "boolean",
+          "required": true,
+          "description": "Si eligió la opción correcta"
+        },
+        "selected_option": {
+          "type": "string",
+          "required": true,
+          "description": "ID de la opción seleccionada"
+        },
+        "correct_option": {
+          "type": "string",
+          "required": true,
+          "description": "ID de la opción correcta"
+        },
+        "time_to_answer_seconds": {
+          "type": "number",
+          "description": "Tiempo para responder en segundos"
+        },
+        "round_number": {
+          "type": "number",
+          "required": true,
+          "description": "Número de ronda (1-5)"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "ISO8601",
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "game_completed",
+      "description": "Usuario completa todo el juego",
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "default": "anon"
+        },
+        "module_id": {
+          "type": "string",
+          "required": true
+        },
+        "final_score": {
+          "type": "number",
+          "required": true,
+          "description": "Puntaje final (incluye bonus por velocidad)"
+        },
+        "aciertos": {
+          "type": "number",
+          "required": true,
+          "description": "Número de rondas correctas"
+        },
+        "total_rounds": {
+          "type": "number",
+          "required": true,
+          "description": "Total de rondas jugadas"
+        },
+        "total_time_seconds": {
+          "type": "number",
+          "required": true,
+          "description": "Tiempo total del juego en segundos"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "ISO8601",
+          "required": true
+        }
+      }
+    },
+    {
+      "name": "module_completed",
+      "description": "Usuario completa todo el módulo M1",
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "default": "anon"
+        },
+        "module_id": {
+          "type": "string",
+          "required": true
+        },
+        "quiz_passed": {
+          "type": "boolean",
+          "required": true,
+          "description": "Si aprobó el quiz"
+        },
+        "quiz_score": {
+          "type": "number",
+          "required": true,
+          "description": "Puntaje del quiz"
+        },
+        "game_score": {
+          "type": "number",
+          "description": "Puntaje del juego si lo completó"
+        },
+        "simulator_runs": {
+          "type": "number",
+          "description": "Número de veces que usó el simulador"
+        },
+        "total_time_minutes": {
+          "type": "number",
+          "description": "Tiempo total en el módulo en minutos"
+        },
+        "sections_completed": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Lista de secciones completadas"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "ISO8601",
+          "required": true
+        }
+      }
+    }
+  ],
+  "implementation_notes": {
+    "privacy": "No se recolecta información personal identificable (PII)",
+    "storage": "Eventos se almacenan con user_id anónimo por defecto",
+    "retention": "Datos agregados para análisis de efectividad pedagógica",
+    "gdpr_compliance": "Cumple con regulaciones de privacidad, datos anónimos"
+  }
+}

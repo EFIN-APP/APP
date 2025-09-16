@@ -1,0 +1,151 @@
+{
+  "module": {
+    "title": "M1: Fundamentos de la Inversión",
+    "subtitle": "Interés compuesto, inflación y riesgo-retorno en el contexto argentino",
+    "duration": "60-90 minutos"
+  },
+  "pager": {
+    "next": "Siguiente",
+    "prev": "Anterior",
+    "page": "Página {{n}} de {{total}}"
+  },
+  "aria": {
+    "next": "Ir a la página siguiente",
+    "prev": "Ir a la página anterior",
+    "dot": "Ir a la página {{n}}"
+  },
+  "title": {
+    "m1": "M1 • Fundamentos"
+  },
+  "navigation": {
+    "start": "Comenzar",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "submit": "Enviar",
+    "continue": "Continuar",
+    "finish": "Finalizar",
+    "restart": "Reiniciar"
+  },
+  "sections": {
+    "why_matters": {
+      "title": "¿Por qué importa?",
+      "description": "Contexto y relevancia de los conceptos"
+    },
+    "key_ideas": {
+      "title": "Ideas clave",
+      "description": "Conceptos fundamentales a dominar"
+    },
+    "quiz": {
+      "title": "Evaluación",
+      "description": "Pon a prueba tu comprensión",
+      "progress": "Pregunta {{current}} de {{total}}",
+      "score": "Puntaje: {{score}}/{{total}}",
+      "passed": "¡Aprobado!",
+      "failed": "Necesitas al menos {{min}} respuestas correctas",
+      "correct": "¡Correcto!",
+      "incorrect": "Incorrecto"
+    },
+    "simulator": {
+      "title": "Simulador: Interés Compuesto + Inflación",
+      "description": "Experimenta con diferentes escenarios",
+      "run": "Simular",
+      "loading": "Calculando...",
+      "presets": "Escenarios predefinidos:"
+    },
+    "game": {
+      "title": "Juego: ¿Cuál rinde más?",
+      "description": "Pon a prueba tu conocimiento comparando opciones de inversión",
+      "rules": "5 rondas • 20 segundos por ronda • Puntaje por acierto y velocidad",
+      "start": "Comenzar",
+      "round": "Ronda {{current}} de {{total}}",
+      "question": "¿Cuál opción rinde más en términos reales?",
+      "next_round": "Siguiente ronda",
+      "see_results": "Ver resultados",
+      "play_again": "Jugar de nuevo",
+      "completed": "¡Juego completado!",
+      "final_score": "Puntaje final: {{score}}",
+      "hits": "Aciertos: {{hits}}/{{total}}",
+      "time": "Tiempo total: {{seconds}} segundos"
+    },
+    "takeaway": {
+      "title": "Puntos clave para recordar",
+      "flashcards_title": "Tarjetas de repaso",
+      "flip_card": "Toca para voltear",
+      "card_counter": "{{current}} / {{total}}"
+    }
+  },
+  "simulator_inputs": {
+    "initial_amount": {
+      "label": "Monto inicial (ARS)",
+      "help": "Capital inicial a invertir"
+    },
+    "monthly_contribution": {
+      "label": "Aporte mensual (ARS)",
+      "help": "Dinero que agregas cada mes"
+    },
+    "annual_rate": {
+      "label": "Tasa anual (%)",
+      "help": "Rendimiento esperado por año"
+    },
+    "commission": {
+      "label": "Comisión anual (%)",
+      "help": "Costo anual sobre el patrimonio"
+    },
+    "horizon": {
+      "label": "Horizonte (meses)",
+      "help": "Tiempo de la inversión"
+    },
+    "rate_mode": {
+      "label": "Tipo de tasa",
+      "tna": "TNA (Tasa Nominal Anual)",
+      "tea": "TEA (Tasa Efectiva Anual)"
+    }
+  },
+  "simulator_results": {
+    "title": "Resultados",
+    "final_nominal": "Monto final nominal:",
+    "final_real": "Monto final real:",
+    "real_return": "Rendimiento real:",
+    "commissions_paid": "Comisiones pagadas:",
+    "positive": "Ganancia",
+    "negative": "Pérdida"
+  },
+  "presets": {
+    "baja_inflacion": "Baja Inflación",
+    "media_inflacion": "Media Inflación",
+    "alta_inflacion_con_shock": "Alta Inflación con Shock"
+  },
+  "tooltips": {
+    "compound_interest": "Los intereses generan nuevos intereses, creando crecimiento exponencial",
+    "tna_vs_tea": "TNA no capitaliza automáticamente; TEA sí incluye capitalización",
+    "real_return": "Rendimiento descontando el efecto de la inflación",
+    "commission_impact": "Pequeñas comisiones pueden reducir significativamente el patrimonio",
+    "inflation_effect": "La inflación reduce el poder adquisitivo si no se supera"
+  },
+  "feedback": {
+    "quiz_explanation": "Explicación:",
+    "game_explanation": "La opción correcta:",
+    "try_again": "Intenta de nuevo",
+    "well_done": "¡Muy bien!",
+    "keep_learning": "Sigue aprendiendo"
+  },
+  "accessibility": {
+    "previous_question": "Pregunta anterior",
+    "next_question": "Siguiente pregunta",
+    "option_number": "Opción {{number}}",
+    "flip_flashcard": "Voltear tarjeta",
+    "previous_card": "Tarjeta anterior",
+    "next_card": "Tarjeta siguiente",
+    "start_game": "Comenzar juego",
+    "select_option": "Seleccionar opción",
+    "run_simulation": "Ejecutar simulación",
+    "load_preset": "Cargar escenario {{preset}}"
+  },
+  "validation": {
+    "required_field": "Este campo es obligatorio",
+    "positive_number": "Debe ser un número positivo",
+    "valid_percentage": "Debe ser un porcentaje válido (0-100)",
+    "min_months": "Mínimo 1 mes",
+    "max_months": "Máximo 60 meses"
+  }
+}

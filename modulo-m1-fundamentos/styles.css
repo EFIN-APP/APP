@@ -1,0 +1,472 @@
+/* Paleta de colores para formato iPhone */
+:root {
+  --bg: #0b1220;
+  --card: #0f1830;
+  --text-primary: #e6ecf8;
+  --text-secondary: #b6c0d9;
+  --accent: #4da3ff;
+  --accent-pressed: #3a86e9;
+  --separator: #223052;
+  /* Added white background and blue text colors */
+  --bg-white: #ffffff;
+  --text-blue: #0b1220;
+  --text-blue-secondary: #1a2332;
+}
+
+/* Estilos base */
+html,
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  overflow: hidden;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
+  overscroll-behavior: none;
+}
+
+/* Clases utilitarias */
+.screen {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 44px 20px 34px 20px; /* Safe areas iOS */
+  box-sizing: border-box;
+  overflow-y: auto;
+  overscroll-behavior: none;
+}
+
+.pager {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.pager-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.pager-page {
+  flex: 0 0 100%;
+  height: 100%;
+  position: relative;
+}
+
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  background: var(--card);
+  border: 1px solid var(--separator);
+  border-radius: 22px;
+  color: var(--text-primary);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.nav-arrow:hover {
+  background: var(--accent);
+  color: white;
+}
+
+.nav-arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  background: var(--card);
+  color: var(--text-secondary);
+}
+
+.nav-arrow.left {
+  left: 20px;
+}
+
+.nav-arrow.right {
+  right: 20px;
+}
+
+.dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--text-secondary);
+  opacity: 0.4;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dot.active {
+  background: var(--accent);
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+.dot:hover {
+  opacity: 0.8;
+}
+
+/* Header styles */
+.module-header {
+  text-align: center;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--separator);
+  margin-bottom: 20px;
+}
+
+.module-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: var(--text-primary);
+}
+
+.module-header p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Section styles */
+.section-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 24px;
+  color: var(--text-primary);
+}
+
+.section-subtitle {
+  font-size: 18px;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+
+/* Card styles */
+.card {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border: 1px solid var(--separator);
+}
+
+.card h3 {
+  color: var(--text-primary);
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+}
+
+.card p {
+  color: var(--text-secondary);
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Added styles for white background elements with blue text */
+.card-white {
+  background: var(--bg-white);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  border: 1px solid var(--separator);
+}
+
+.card-white h3 {
+  color: var(--text-blue);
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+}
+
+.card-white p {
+  color: var(--text-blue-secondary);
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.text-on-white {
+  color: var(--text-blue);
+}
+
+.text-secondary-on-white {
+  color: var(--text-blue-secondary);
+}
+
+/* Button styles */
+.btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn:hover {
+  background: var(--accent-pressed);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: var(--card);
+  color: var(--text-primary);
+  border: 1px solid var(--separator);
+}
+
+.btn-secondary:hover {
+  background: var(--separator);
+}
+
+.btn-white {
+  background: var(--bg-white);
+  color: var(--text-blue);
+  border: 1px solid var(--separator);
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-white:hover {
+  background: #f0f0f0;
+  color: var(--text-blue);
+}
+
+/* Input styles */
+.input {
+  background: var(--card);
+  border: 1px solid var(--separator);
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: var(--text-primary);
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.input::placeholder {
+  color: var(--text-secondary);
+}
+
+.input-white {
+  background: var(--bg-white);
+  border: 1px solid var(--separator);
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: var(--text-blue);
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input-white:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.input-white::placeholder {
+  color: var(--text-blue-secondary);
+}
+
+/* Grid layouts */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.grid-1 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 390px) {
+  .screen {
+    padding: 44px 16px 34px 16px;
+  }
+
+  .nav-arrow {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+  }
+
+  .nav-arrow.left {
+    left: 16px;
+  }
+
+  .nav-arrow.right {
+    right: 16px;
+  }
+}
+
+/* Adding new text box and content container classes for iPhone layout */
+.text-box-white {
+  background: #ffffff;
+  color: #0b1220;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  border: 1px solid var(--separator);
+}
+
+.content-box {
+  max-width: 85%;
+  max-height: 90%;
+  margin: 0 auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-secondary) transparent;
+}
+
+.content-box::-webkit-scrollbar {
+  width: 4px;
+}
+
+.content-box::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.content-box::-webkit-scrollbar-thumb {
+  background: var(--text-secondary);
+  border-radius: 2px;
+}
+
+/* Updated quiz option styles for better readability and wrapping */
+.quiz-option,
+.option {
+  min-height: 48px;
+  padding: 12px;
+  line-height: 1.5;
+  flex-wrap: wrap;
+  word-wrap: break-word;
+  hyphens: auto;
+  background: var(--card);
+  border: 1px solid var(--separator);
+  border-radius: 8px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.quiz-option:hover,
+.option:hover {
+  background: var(--separator);
+}
+
+.quiz-option.selected,
+.option.selected {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+/* Key ideas styling with white borders and semi-transparent background */
+.key-idea-card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  color: #0b1220;
+}
+
+.key-idea-card h3 {
+  color: #0b1220;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+}
+
+.key-idea-card p {
+  color: #0b1220;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Ensuring SF Pro font family is applied globally */
+* {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+}
+
+p,
+span,
+div {
+  font-weight: 400;
+}
