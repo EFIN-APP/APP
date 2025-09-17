@@ -8,12 +8,14 @@ import { PostComposer } from "./post-composer"
 import { CourseModuleEngine } from "./course-module-engine"
 import { UserProfile } from "./user-profile"
 import { Button } from "./ui/button"
-import { Plus, User } from "lucide-react"
+import { FintokFeed } from "./fintok-feed"
+import { Flame, Home as HomeIcon, Plus, User } from "lucide-react"
 
 type HomeState = {
   showPostComposer: boolean
   showCourseModule: boolean
   showProfile: boolean
+  showFintok: boolean
   activeTab: FeedTab
 }
 
@@ -21,7 +23,15 @@ type HomeAction =
   | { type: "SHOW_POST_COMPOSER"; value: boolean }
   | { type: "SHOW_COURSE_MODULE"; value: boolean }
   | { type: "SHOW_PROFILE"; value: boolean }
+  | { type: "SHOW_FINTOK"; value: boolean }
   | { type: "SET_ACTIVE_TAB"; value: FeedTab }
+
+interface EFINHomeProps {
+  userName?: string
+  objectives?: string[]
+  interests?: string[]
+  onResetProfile?: () => void
+}
 
 function reducer(state: HomeState, action: HomeAction): HomeState {
   switch (action.type) {
@@ -31,6 +41,8 @@ function reducer(state: HomeState, action: HomeAction): HomeState {
       return { ...state, showCourseModule: action.value }
     case "SHOW_PROFILE":
       return { ...state, showProfile: action.value }
+    case "SHOW_FINTOK":
+      return { ...state, showFintok: action.value }
     case "SET_ACTIVE_TAB":
       return { ...state, activeTab: action.value }
     default:
@@ -38,13 +50,23 @@ function reducer(state: HomeState, action: HomeAction): HomeState {
   }
 }
 
-export function EFINHome() {
+export function EFINHome({ userName, objectives, interests, onResetProfile }: EFINHomeProps) {
   const [state, dispatch] = useReducer(reducer, {
     showPostComposer: false,
     showCourseModule: false,
     showProfile: false,
+    showFintok: false,
     activeTab: FeedTab.ForYou,
   })
+
+  if (state.showFintok) {
+    return (
+      <FintokFeed
+        interests={interests}
+        onClose={() => dispatch({ type: "SHOW_FINTOK", value: false })}
+      />
+    )
+  }
 
   if (state.showProfile) {
     return (
@@ -54,7 +76,12 @@ export function EFINHome() {
             ← Back to Home
           </Button>
         </div>
-        <UserProfile />
+        <UserProfile
+          name={userName}
+          objectives={objectives}
+          interests={interests}
+          onResetProfile={onResetProfile}
+        />
       </div>
     )
   }
@@ -65,7 +92,10 @@ export function EFINHome() {
       <div className="sticky top-0 z-10 bg-efin-light-gray pb-4">
         <div className="flex items-center justify-between p-4">
           <div className="flex-1">
-            <ContinueCourseCard onStartCourse={() => dispatch({ type: "SHOW_COURSE_MODULE", value: true })} />
+            <ContinueCourseCard
+              userName={userName}
+              onStartCourse={() => dispatch({ type: "SHOW_COURSE_MODULE", value: true })}
+            />
           </div>
           <Button
             onClick={() => dispatch({ type: "SHOW_PROFILE", value: true })}
@@ -86,7 +116,29 @@ export function EFINHome() {
 
       {/* Feed Content */}
       <div className="px-4 pb-20">
-        <EFINFeed activeTab={state.activeTab} />
+        <EFINFeed activeTab={state.activeTab} interests={interests} />
+      </div>
+
+      <div className="fixed bottom-6 left-1/2 z-20 flex -translate-x-1/2 items-center gap-3 rounded-full bg-white/80 px-4 py-2 text-efin-navy shadow-lg backdrop-blur">
+        <Button
+          onClick={() => {
+            dispatch({ type: "SHOW_FINTOK", value: false })
+          }}
+          variant="ghost"
+          size="icon"
+          className="h-10 w-10 rounded-full text-efin-navy hover:bg-efin-navy/10"
+          aria-label="Inicio"
+        >
+          <HomeIcon className="h-5 w-5" />
+        </Button>
+        <Button
+          onClick={() => dispatch({ type: "SHOW_FINTOK", value: true })}
+          size="icon"
+          className="h-10 w-10 rounded-full bg-gradient-to-br from-orange-400 to-pink-500 text-white shadow-md hover:from-orange-500 hover:to-pink-500"
+          aria-label="Abrir Fintok"
+        >
+          <Flame className="h-5 w-5" />
+        </Button>
       </div>
 
       {/* Floating Action Button */}
