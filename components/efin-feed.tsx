@@ -10,11 +10,21 @@ import { FeedTab } from "./feed-tabs"
 import { FeedPost, mockPosts } from "@/lib/posts"
 import { PostActions } from "./post-actions"
 
-interface EFINFeedProps {
-  activeTab: FeedTab
+const interestTagMap: Record<string, string[]> = {
+  Inversiones: ["Investment", "TimeValue", "TVM"],
+  Presupuesto: ["Budgeting", "Savings"],
+  "Finanzas personales": ["PersonalFinance", "Savings"],
+  "Cripto & Web3": ["Crypto"],
+  Economía: ["Economy"],
+  Mercados: ["Markets"],
 }
 
-export function EFINFeed({ activeTab }: EFINFeedProps) {
+interface EFINFeedProps {
+  activeTab: FeedTab
+  interests?: string[]
+}
+
+export function EFINFeed({ activeTab, interests }: EFINFeedProps) {
   const [posts, setPosts] = useState<FeedPost[]>(mockPosts)
 
   const handleLike = useCallback((postId: string) => {
@@ -49,6 +59,12 @@ export function EFINFeed({ activeTab }: EFINFeedProps) {
     )
   }, [])
 
+  const preferredTags = new Set(
+    (interests ?? [])
+      .flatMap((interest) => interestTagMap[interest] ?? [])
+      .map((tag) => tag.toLowerCase()),
+  )
+
   const filteredPosts = posts.filter((post) => {
     switch (activeTab) {
       case FeedTab.Following:
@@ -60,8 +76,24 @@ export function EFINFeed({ activeTab }: EFINFeedProps) {
     }
   })
 
+  const orderedPosts = [...filteredPosts].sort((a, b) => {
+    const aMatches = a.tags?.some((tag) => preferredTags.has(tag.toLowerCase())) ? 1 : 0
+    const bMatches = b.tags?.some((tag) => preferredTags.has(tag.toLowerCase())) ? 1 : 0
+
+    return bMatches - aMatches
+  })
+
   return (
     <div className="space-y-6">
+      {interests && interests.length > 0 && (
+        <Card className="p-4 bg-gradient-to-r from-efin-blue/5 to-efin-turquoise/5 border-efin-blue/10">
+          <p className="text-sm text-efin-navy font-medium">
+            Personalizamos tu feed con foco en: {interests.slice(0, 3).join(", ")}
+            {interests.length > 3 ? " y más." : "."}
+          </p>
+        </Card>
+      )}
+
       {activeTab === FeedTab.ForYou && (
         <div>
           <div className="flex items-center gap-2 mb-4">
@@ -72,7 +104,7 @@ export function EFINFeed({ activeTab }: EFINFeedProps) {
         </div>
       )}
 
-      {filteredPosts.map((post) => (
+      {orderedPosts.map((post) => (
         <Card key={post.id} className="p-4 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow">
           <div className="flex items-start gap-3">
             <Avatar className="h-10 w-10">
