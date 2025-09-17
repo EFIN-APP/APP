@@ -23,6 +23,13 @@ type HomeAction =
   | { type: "SHOW_PROFILE"; value: boolean }
   | { type: "SET_ACTIVE_TAB"; value: FeedTab }
 
+interface EFINHomeProps {
+  userName?: string
+  objectives?: string[]
+  interests?: string[]
+  onResetProfile?: () => void
+}
+
 function reducer(state: HomeState, action: HomeAction): HomeState {
   switch (action.type) {
     case "SHOW_POST_COMPOSER":
@@ -38,7 +45,7 @@ function reducer(state: HomeState, action: HomeAction): HomeState {
   }
 }
 
-export function EFINHome() {
+export function EFINHome({ userName, objectives, interests, onResetProfile }: EFINHomeProps) {
   const [state, dispatch] = useReducer(reducer, {
     showPostComposer: false,
     showCourseModule: false,
@@ -54,7 +61,12 @@ export function EFINHome() {
             ← Back to Home
           </Button>
         </div>
-        <UserProfile />
+        <UserProfile
+          name={userName}
+          objectives={objectives}
+          interests={interests}
+          onResetProfile={onResetProfile}
+        />
       </div>
     )
   }
@@ -65,7 +77,10 @@ export function EFINHome() {
       <div className="sticky top-0 z-10 bg-efin-light-gray pb-4">
         <div className="flex items-center justify-between p-4">
           <div className="flex-1">
-            <ContinueCourseCard onStartCourse={() => dispatch({ type: "SHOW_COURSE_MODULE", value: true })} />
+            <ContinueCourseCard
+              userName={userName}
+              onStartCourse={() => dispatch({ type: "SHOW_COURSE_MODULE", value: true })}
+            />
           </div>
           <Button
             onClick={() => dispatch({ type: "SHOW_PROFILE", value: true })}
@@ -86,7 +101,7 @@ export function EFINHome() {
 
       {/* Feed Content */}
       <div className="px-4 pb-20">
-        <EFINFeed activeTab={state.activeTab} />
+        <EFINFeed activeTab={state.activeTab} interests={interests} />
       </div>
 
       {/* Floating Action Button */}

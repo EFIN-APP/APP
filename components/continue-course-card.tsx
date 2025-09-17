@@ -7,17 +7,19 @@ import { Play, Settings } from "lucide-react"
 
 interface ContinueCourseCardProps {
   onStartCourse?: () => void
+  userName?: string
 }
 
-export function ContinueCourseCard({ onStartCourse }: ContinueCourseCardProps) {
+export function ContinueCourseCard({ onStartCourse, userName }: ContinueCourseCardProps) {
   const progress = 65 // Current progress percentage
+  const displayName = userName ?? "Santiago Carrasco"
 
   return (
     <div className="p-4">
       <Card className="bg-efin-navy text-white p-6 rounded-2xl shadow-xl">
         <div className="flex items-start justify-between mb-4">
           <div>
-            <h2 className="text-xl font-semibold mb-1">Santiago Carrasco</h2>
+            <h2 className="text-xl font-semibold mb-1">{displayName}</h2>
             <p className="text-efin-turquoise text-sm font-medium">Continue Class - IN PROGRESS</p>
           </div>
           <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
