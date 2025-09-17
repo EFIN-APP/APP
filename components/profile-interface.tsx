@@ -20,7 +20,8 @@ export function ProfileInterface() {
   const handleTabChange = (value: string) => {
     const params = new URLSearchParams(searchParams)
     params.set("tab", value)
-    router.replace(`?${params.toString()}`)
+    const query = params.toString()
+    router.replace(query ? `/profile?${query}` : "/profile")
   }
 
   if (showSettings) {
@@ -31,7 +32,15 @@ export function ProfileInterface() {
     <div className="max-w-md mx-auto bg-background min-h-screen">
       {/* Header */}
       <div className="bg-primary text-primary-foreground p-4 flex items-center justify-between">
-        <ChevronLeft className="w-6 h-6" aria-hidden="true" />
+        <Button
+          variant="ghost"
+          size="icon"
+          className="text-primary-foreground hover:bg-primary/20"
+          onClick={() => router.push("/")}
+          aria-label="Volver al inicio"
+        >
+          <ChevronLeft className="w-6 h-6" aria-hidden="true" />
+        </Button>
         <h1 className="font-bold text-lg">Tu Perfil</h1>
         <Button
           variant="ghost"
@@ -115,6 +124,7 @@ export function ProfileInterface() {
             size="icon"
             className="text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary/20"
             aria-label="Inicio"
+            onClick={() => router.push("/")}
           >
             <Home className="w-6 h-6" />
           </Button>
@@ -131,6 +141,8 @@ export function ProfileInterface() {
             size="icon"
             className="text-primary-foreground hover:bg-primary/20"
             aria-label="Perfil"
+            aria-current="page"
+            onClick={() => router.push("/profile")}
           >
             <User className="w-6 h-6" />
           </Button>
