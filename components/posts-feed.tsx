@@ -5,6 +5,15 @@ import { Badge } from "@/components/ui/badge"
 import { Heart, MessageCircle, Bookmark, Share } from "lucide-react"
 import { Post, posts as defaultPosts } from "@/lib/data"
 
+const getInitials = (name: string) =>
+  name
+    .split(" ")
+    .filter(Boolean)
+    .map((part) => part[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase()
+
 interface PostsFeedProps {
   showSocial?: boolean
   posts?: Post[]
@@ -18,12 +27,9 @@ export function PostsFeed({ showSocial = false, posts = defaultPosts }: PostsFee
           <CardHeader className="pb-3">
             <div className="flex items-center space-x-3">
               <Avatar className="w-10 h-10">
-                <AvatarImage src={post.avatar || "/placeholder.svg"} alt={post.user} />
+                {post.avatar ? <AvatarImage src={post.avatar} alt={post.user} /> : null}
                 <AvatarFallback className="bg-primary text-primary-foreground">
-                  {post.user
-                    .split(" ")
-                    .map((n) => n[0])
-                    .join("")}
+                  {getInitials(post.user)}
                 </AvatarFallback>
               </Avatar>
               <div className="flex-1">

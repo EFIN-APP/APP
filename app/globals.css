@@ -38,6 +38,12 @@
   --sidebar-accent-foreground: oklch(0.15 0.02 240);
   --sidebar-border: oklch(0.9 0 0);
   --sidebar-ring: oklch(0.6 0.15 240);
+
+  /* Paleta personalizada de EFIN */
+  --efin-navy: #0d1b2a;
+  --efin-blue: #246bfd;
+  --efin-turquoise: #2de2e6;
+  --efin-light-gray: #f8f9fa;
 }
 
 .dark {
@@ -115,6 +121,12 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Utilidades derivadas de la paleta EFIN */
+  --color-efin-navy: var(--efin-navy);
+  --color-efin-blue: var(--efin-blue);
+  --color-efin-turquoise: var(--efin-turquoise);
+  --color-efin-light-gray: var(--efin-light-gray);
 }
 
 @layer base {

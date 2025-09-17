@@ -7,7 +7,7 @@ export interface Post {
   tags: string[];
   likes: number;
   comments: number;
-  avatar: string;
+  avatar?: string;
 }
 
 export const posts: Post[] = [
@@ -20,7 +20,6 @@ export const posts: Post[] = [
     tags: ["#presupuesto", "#finanzas"],
     likes: 12,
     comments: 3,
-    avatar: "/diverse-user-avatars.png",
   },
   {
     id: 2,
@@ -31,7 +30,6 @@ export const posts: Post[] = [
     tags: ["#inversiones", "#progreso"],
     likes: 8,
     comments: 1,
-    avatar: "/female-user-avatar.png",
   },
   {
     id: 3,
@@ -42,7 +40,6 @@ export const posts: Post[] = [
     tags: ["#crypto", "#estudio"],
     likes: 15,
     comments: 7,
-    avatar: "/professional-woman-avatar.png",
   },
 ];
 

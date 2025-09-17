@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -45,7 +45,6 @@ export function SettingsPanel({ onBack }: SettingsPanelProps) {
           {/* Profile Picture */}
           <div className="text-center">
             <Avatar className="w-20 h-20 mx-auto mb-4">
-              <AvatarImage src="/professional-headshot.png" alt="Santiago Carrasco" />
               <AvatarFallback className="bg-primary text-primary-foreground text-2xl">SC</AvatarFallback>
             </Avatar>
             <Button variant="outline" size="sm">

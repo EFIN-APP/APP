@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 
@@ -8,7 +8,6 @@ export function UserInfoCard() {
       <CardContent className="p-6">
         <div className="flex items-center space-x-4 mb-4">
           <Avatar className="w-16 h-16">
-            <AvatarImage src="/professional-headshot.png" alt="Santiago Carrasco" />
             <AvatarFallback className="bg-primary text-primary-foreground text-xl font-bold">SC</AvatarFallback>
           </Avatar>
           <div className="flex-1">

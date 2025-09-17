@@ -1,9 +1,5 @@
-import { ProfileInterface } from "@/components/profile-interface"
+import { EFINHome } from "@/components/efin-home"
 
-export default function Home() {
-  return (
-    <main className="min-h-screen bg-background">
-      <ProfileInterface />
-    </main>
-  )
+export default function HomePage() {
+  return <EFINHome />
 }
